@@ -22,7 +22,7 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "aot": false,
+            "aot": true,
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -46,7 +46,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -125,6 +124,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "test-ng"
+    }
+  },
+  "defaultProject": "test-ng",
+  "cli": {
+    "analytics": "a0721c80-9309-4551-9b82-2a7975f3d9d7"
+  }
 }
