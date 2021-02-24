@@ -6,6 +6,17 @@ import { ProjectLayoutComponent } from './core/layout/project-layout/project-lay
 
 
 const routes: Routes = [
+
+  {
+    path: '',
+    component: ProjectLayoutComponent,
+    children: [
+      {
+        path: 'projects',
+        loadChildren: () => import('./modules/projects/projects.module').then(m => m.ProjectsModule)
+      }
+    ]
+  },
   {
     path: '',
     component: ContentLayoutComponent,
@@ -22,16 +33,6 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: ProjectLayoutComponent,
-    children: [
-      {
-        path: 'projects',
-        loadChildren: () => import('./modules/projects/projects.module').then(m => m.ProjectsModule)
-      }
-    ]
-  },
-  {
-    path: '',
     component: UnauthLayoutComponent,
     loadChildren: () => import('./modules/unauth/unauth.module').then(m => m.UnauthModule)
   },
@@ -43,7 +44,8 @@ const routes: Routes = [
   // },
 
 
-  { path: 'projects', loadChildren: () => import('./modules/projects/projects.module').then(m => m.ProjectsModule) }
+  { path: 'projects', loadChildren: () => import('./modules/projects/projects.module').then(m => m.ProjectsModule) },
+  { path: '**', redirectTo: '/login', pathMatch: 'full' },
 ];
 
 @NgModule({

@@ -10,9 +10,11 @@ dayjs.extend(buddhistEra);
 })
 export class DateService {
 
-  constructor() { }
-
-  formatDate(d: string) {
+  static formatDate(d: string) {
     return d ? dayjs(d).locale(th).format('DD MMM BBBB') : '-';
+  }
+
+  static formatDateOneDigit(d: string) {
+    return dayjs(d).locale(th).format('D MMM BBBB');
   }
 }

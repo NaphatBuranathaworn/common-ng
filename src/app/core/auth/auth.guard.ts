@@ -4,8 +4,9 @@ import {
   , ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { AuthService } from './auth.service';
-import { catchError, map } from 'rxjs/operators';
+
+import { catchError, map, tap } from 'rxjs/operators';
+import { AuthService } from '../services/api/authentication/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,22 +21,19 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   }
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    // return this.authService.isAuthenticated().pipe(map((response: { authenticated: boolean }) => {
-    //   if (response.authenticated) {
-    //     return true;
-    //   }
-    //   this.router.navigate(['/login']);
-    //   return false;
-    // }), catchError((error) => {
-    //   this.router.navigate(['/login']);
-    //   return of(false);
-    // }));
-
-    if (true) {
-      return of(true);
-    }
-    this.router.navigate(['/login']);
-    return of(false);
+    return this.authService.isAuthenticated()
+    .pipe(
+      tap((response) => console.log(response)),
+      map((response: boolean ) => {
+      if (response) {
+        return true;
+      }
+      this.router.navigate(['/login']);
+      return false;
+    }), catchError((error) => {
+      this.router.navigate(['/login']);
+      return of(false);
+    }));
   }
 
   canActivateChild(

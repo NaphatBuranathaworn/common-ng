@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   }
 
   onLoginClick() {
-    this.router.navigate(['/main/landing-page']);
+    // this.router.navigate(['/main/landing-page']);
+    this.router.navigate(['/projects/list']);
   }
 }
